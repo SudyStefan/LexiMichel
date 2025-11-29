@@ -1,0 +1,2 @@
+# TranslateMichel
+aggregator for dictionaries
