@@ -2,6 +2,7 @@ import { Scraper } from "../../scrapers/Scraper";
 import { TransResult } from "../../models/transResult";
 import { DwdsScraper } from "../../scrapers/dwdsScraper";
 import { NextRequest, NextResponse } from "next/server";
+import { DudenScraper } from "@/app/scrapers/dudenScraper";
 
 const fetchData = (word: string, scrapers: Scraper[]): Promise<TransResult[]> => {
   return Promise.all(
@@ -21,7 +22,10 @@ const fetchData = (word: string, scrapers: Scraper[]): Promise<TransResult[]> =>
     });
 };
 
-const scrapers: Scraper[] = [DwdsScraper];
+const scrapers: Scraper[] = [
+  DwdsScraper,
+  DudenScraper
+];
 
 export const GET = (req: NextRequest) => {
   const word  = req.url?.split('=')[1];

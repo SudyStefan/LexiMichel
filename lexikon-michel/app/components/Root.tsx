@@ -24,7 +24,7 @@ export const Root = () => {
       <main className={styles.root}>
         <Header />
         <SearchBar onSearch={(word: string) => fetchSearchResults(word)}/>
-        <ResultList resultItems={searchResults} />
+        {searchResults && (<ResultList resultItems={searchResults} />)}  
       </main>
     </div>
   )

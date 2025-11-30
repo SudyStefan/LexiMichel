@@ -41,7 +41,7 @@ class dwdsScraper implements Scraper {
   }
 
   getGender($: cheerio.Root): WordGender {
-    const genderChar = $(this.classTarget).first().text().split('(')[1][0];
+    const genderChar = $(this.genderTarget).first().text().split('(')[1][0];
     switch (genderChar) {
       case "N":
         return WordGender.N;
