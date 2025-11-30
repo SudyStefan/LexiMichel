@@ -2,6 +2,7 @@ import { WordClass, WordGender } from "../models/transResult";
 
 export interface Scraper {
   provider: string;
+  url: string;
   
   fetchHTML(wordToSearch: string): Promise<cheerio.Root>;
   getDescription(root: cheerio.Root): string;

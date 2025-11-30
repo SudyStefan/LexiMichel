@@ -14,6 +14,7 @@ export enum WordGender {
 
 export type TransResult = {
   originalWord: string,
+  url: string;
   description: string,
   class: WordClass,
   gender?: WordGender 

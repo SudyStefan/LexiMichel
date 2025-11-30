@@ -6,7 +6,7 @@ export const Header = () => {
   return (
     <div className={styles.header}>
       <a className={styles.headerText} href="./">
-        TranslateMichel
+        LexiMichel
       </a>
     </div>
   )

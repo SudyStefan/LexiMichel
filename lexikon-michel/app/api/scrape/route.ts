@@ -10,6 +10,7 @@ const fetchData = (word: string, scrapers: Scraper[]): Promise<TransResult[]> =>
       return scraper.fetchHTML(word)
         .then(root => ({
           originalWord: word,
+          url: scraper.url + word,
           description: scraper.getDescription(root),
           class: scraper.getClass(root),
           gender: scraper.getGender(root),

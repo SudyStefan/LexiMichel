@@ -5,15 +5,16 @@ import * as cheerio from 'cheerio';
 
 class dudenScraper implements Scraper {
   provider = "Duden";
+  url = "https://www.duden.de/rechtschreibung/";
+
 
   private userAgent = "TranslateMichelScraper (contact: stefan.sudy1@gmail.com)" ;
-  private prefixUrl = "https://www.duden.de/rechtschreibung/";
   private descriptionTarget = "div.enumeration__text";
   private classTarget = "dd.tuple__val";
   private genderTarget = "dd.tuple__val";
   
   fetchHTML(wordToSearch: string): Promise<cheerio.Root> {
-    return axios.get(this.prefixUrl + wordToSearch, {
+    return axios.get(this.url + wordToSearch, {
       headers: { "User-Agent": this.userAgent },
       timeout: 5000,
     }).then(res => cheerio.load(res.data)!)

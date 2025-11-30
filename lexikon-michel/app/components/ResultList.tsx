@@ -17,9 +17,10 @@ export const ResultList = ({ resultItems }: ResultListProp) => {
   
   return (
     <div className={styles.resultList}>
-      <ul>
+      <ul className={styles.list}>
         {resultItems.map(item => (
-          <li key={item.provider}>
+          <li className={styles.listItem}
+            key={item.provider}>
             <ResultItem {...item}/>
           </li>
           ))}

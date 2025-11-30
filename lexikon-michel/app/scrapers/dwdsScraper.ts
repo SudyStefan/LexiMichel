@@ -5,15 +5,15 @@ import * as cheerio from 'cheerio';
 
 class dwdsScraper implements Scraper {
   provider = "DWDS";
+   url = "https://www.dwds.de/wb/";
 
   private userAgent = "TranslateMichelScraper (contact: stefan.sudy1@gmail.com)" ;
-  private prefixUrl = "https://www.dwds.de/wb/";
   private descriptionTarget = "span.dwdswb-definition";
   private classTarget = "span.dwdswb-ft-blocktext";
   private genderTarget = "span.dwdswb-ft-blocktext";
   
   fetchHTML(wordToSearch: string): Promise<cheerio.Root> {
-    return axios.get(this.prefixUrl + wordToSearch, {
+    return axios.get(this.url + wordToSearch, {
       headers: { "User-Agent": this.userAgent },
       timeout: 5000,
     }).then(res => cheerio.load(res.data)!)
