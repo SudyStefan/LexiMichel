@@ -3,7 +3,7 @@ import styles from "../styles/resultitem.module.css"
 
 export const ResultItem = (item: TransResult) => {
   return (
-    <div className={styles.resultItem}>
+    <li key={item.provider} className={styles.resultItem}>
       <div className={styles.header}>
         <span className={styles.provider}>
           <a href={item.url}>{item.provider}</a>
@@ -14,6 +14,6 @@ export const ResultItem = (item: TransResult) => {
       <div className={styles.body}>
         <span>{item.description}</span>
       </div>
-    </div>
-  )
+    </li>
+  );
 }

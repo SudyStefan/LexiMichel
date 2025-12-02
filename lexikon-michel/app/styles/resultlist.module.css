@@ -5,14 +5,8 @@
   flex-direction: column;
   justify-content: start;
   align-items: start;
-}
-
-
-.list {
+  background-color: rgba(40, 40, 40, 1);
+  padding: 20px 30px;
   width: 100%;
   list-style: none;
-}
-
-.listItem {
-  width: 100%;
 }

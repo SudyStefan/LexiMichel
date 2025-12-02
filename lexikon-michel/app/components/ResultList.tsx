@@ -1,30 +1,26 @@
 'use client'
 
-import { useEffect } from "react"
+import { Dispatch, SetStateAction, useEffect } from "react"
 import { TransResult } from "../models/transResult"
 import styles from "../styles/resultlist.module.css"
 import { ResultItem } from "./ResultItem"
 
 type ResultListProp = {
-  resultItems: TransResult[]
+  resultItems: TransResult[],
+  setResultItems?: Dispatch<SetStateAction<TransResult[]>>
 }
 
 
-export const ResultList = ({ resultItems }: ResultListProp) => {
+export const ResultList = (props: ResultListProp) => {
   useEffect(() => {
-    console.log(`Results: `, resultItems);
+    console.log(`Results: `, props.resultItems);
   }, []);
   
   return (
-    <div className={styles.resultList}>
-      <ul className={styles.list}>
-        {resultItems.map(item => (
-          <li className={styles.listItem}
-            key={item.provider}>
-            <ResultItem {...item}/>
-          </li>
-          ))}
-      </ul>
-    </div>
+    <ul className={styles.resultList}>
+      {props.resultItems.map(item => 
+        (<ResultItem {...item} key={item.provider}/>)
+      )}
+    </ul>
   )
 }

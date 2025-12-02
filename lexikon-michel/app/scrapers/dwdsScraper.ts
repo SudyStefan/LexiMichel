@@ -4,15 +4,19 @@ import { Scraper } from "./Scraper";
 import * as cheerio from 'cheerio';
 
 class dwdsScraper implements Scraper {
-  provider = "DWDS";
-   url = "https://www.dwds.de/wb/";
+  private provider = "DWDS";
+  private url = "https://www.dwds.de/wb/";
 
   private userAgent = "TranslateMichelScraper (contact: stefan.sudy1@gmail.com)" ;
   private descriptionTarget = "span.dwdswb-definition";
   private classTarget = "span.dwdswb-ft-blocktext";
   private genderTarget = "span.dwdswb-ft-blocktext";
   
-  fetchHTML(wordToSearch: string): Promise<cheerio.Root> {
+
+  public getProvider = (): string => this.provider;
+  public getUrl = (): string => this.url;
+
+  public fetchHTML(wordToSearch: string): Promise<cheerio.Root> {
     return axios.get(this.url + wordToSearch, {
       headers: { "User-Agent": this.userAgent },
       timeout: 5000,
@@ -22,35 +26,37 @@ class dwdsScraper implements Scraper {
       });
   }
   
-  getClass($: cheerio.Root): WordClass {
-    const classChar = $(this.classTarget).first().text()[0];
-    switch (classChar) {
-      case "S":
-        return WordClass.N;
-      case "V":
-        return WordClass.V;
-      case "A":
-        return WordClass.A;
-      default:
-        return WordClass.U;
+  public getClass($: cheerio.Root): WordClass {
+    try {
+      const classString = $(this.classTarget).first().text();
+            
+      if (classString.includes("Su")) return WordClass.N;
+      if (classString.includes("Ve")) return WordClass.V;
+      if (classString.includes("Ad")) return WordClass.A;
+
+      return WordClass.U;
+    } catch {
+      console.log(`Failed to scrape class in ${this.provider}...`);
+      return WordClass.U;
     }
   }
 
-  getDescription($: cheerio.Root): string {
+  public getDescription($: cheerio.Root): string {
     return $(this.descriptionTarget).first().text();
   }
 
-  getGender($: cheerio.Root): WordGender {
-    const genderChar = $(this.genderTarget).first().text().split('(')[1][0];
-    switch (genderChar) {
-      case "N":
-        return WordGender.N;
-      case "M":
-        return WordGender.M;
-      case "F":
-        return WordGender.N
-      default:
-        return WordGender.U
+  public getGender($: cheerio.Root): WordGender {
+    try {
+      const genderString = $(this.genderTarget).first().text();
+
+      if (genderString.includes("N")) return WordGender.N;
+      if (genderString.includes("M")) return WordGender.M;
+      if (genderString.includes("F")) return WordGender.F;
+
+      return WordGender.U
+    } catch (err) {
+      console.log(`Failed to scrape gender in ${this.provider}...`);
+      return WordGender.U
     }
   }
 }

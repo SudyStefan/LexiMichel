@@ -1,0 +1,11 @@
+.infoPopupList {
+  display: flex;
+  position: absolute;
+  width: 100%;
+  max-width: 800px;
+  left: 0;
+  background-color: rgba(150, 150, 150, 0.6);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
