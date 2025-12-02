@@ -12,7 +12,6 @@ const wait = (timeInMilliSeconds: number): Promise<void> => {
 }
 
 export const InfoPopupItem = (props: InfoPupupItem) => {
-
   useEffect(() => {
     wait(3000)
       .then(props.onTimeout(props.infoItem.timeStampId))
